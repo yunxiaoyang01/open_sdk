@@ -20,13 +20,11 @@ tree -d -L 1 ./
 ├── httpserver
 ├── logger  # Logger 统一日志库
 ├── metadata
-├── metrics
-├── mongoc  # 对mgo的封装，由于mgo已暂停维护，【不建议使用此库】
 ├── mongoc_official # 对mongo官方的golang库的封装。【推荐使用此库】
 ├── octrace
 ├── pubsub
 ├── redisc # Redis
-└── xd_error
+└── error
 ```
 
 各层级目录信息如下：
@@ -56,11 +54,6 @@ tree -d ./
 │   ├── middles
 │   └── status
 ├── logger
-├── metadata
-├── metrics
-│   └── internal
-│       └── lv
-├── mongoc
 ├── mongoc_official
 │   └── mongoc_wrapped
 ├── octrace
@@ -80,7 +73,7 @@ tree -d ./
 │   ├── pulsar
 │   └── redisbroadcast
 ├── redisc
-└── xd_error
+└── error
 
 ```
 
