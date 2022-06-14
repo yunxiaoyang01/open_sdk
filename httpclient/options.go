@@ -32,7 +32,6 @@ func newOptions(opts ...Option) Options {
 		opt(&options)
 	}
 	options.PreRequestHooks = append(options.PreRequestHooks, hooks.DNSTrace())
-	options.AfterResponseHooks = append(options.AfterResponseHooks, hooks.LatencyMetrics())
 	return options
 }
 
