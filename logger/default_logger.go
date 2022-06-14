@@ -37,12 +37,6 @@ func newJSONFormatter() logrus.Formatter {
 	return formatter
 }
 
-func newTextFormatter() logrus.Formatter {
-	formatter := new(logrus.TextFormatter)
-	formatter.TimestampFormat = "2006-01-02T15:04:05.000Z07:00"
-	return formatter
-}
-
 // New 生成带有指定格式的标准logger
 func openStdLoggerNew() Logger {
 	formatter := newJSONFormatter()
