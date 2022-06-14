@@ -11,20 +11,20 @@ const (
 	skipStack     = 2
 )
 
-type XDError struct {
+type CommonError struct {
 	Code     ErrorCodeType `json:"code"`
 	Message  string        `json:"message"`
 	RTStacks string        `json:"rt_stacks"`
 	err      error
 }
 
-func (e *XDError) Error() string {
+func (e *CommonError) Error() string {
 	data, _ := json.Marshal(e)
 
 	return string(data)
 }
 
-func (e *XDError) Unwrap() error {
+func (e *CommonError) Unwrap() error {
 	return e.err
 }
 
@@ -50,7 +50,7 @@ func newError(code ErrorCodeType, err error, msg ...string) error {
 
 	stacks := getStacks(skipStack)
 
-	return &XDError{
+	return &CommonError{
 		Code:     code,
 		Message:  str,
 		RTStacks: stacks,
@@ -62,12 +62,12 @@ func New(code ErrorCodeType, msg ...string) error {
 	return newError(code, nil, msg...)
 }
 
-func ErrToXDError(err error, code ErrorCodeType) error {
+func ErrToCommonError(err error, code ErrorCodeType) error {
 	if err == nil {
 		return nil
 	}
 
-	_, ok := err.(*XDError)
+	_, ok := err.(*CommonError)
 	if ok {
 		return err
 	}
@@ -76,7 +76,7 @@ func ErrToXDError(err error, code ErrorCodeType) error {
 }
 
 func WrapCode(err error, code ErrorCodeType) error {
-	return ErrToXDError(err, code)
+	return ErrToCommonError(err, code)
 }
 
 func Wrap(err error, msg ...string) error {
@@ -84,7 +84,7 @@ func Wrap(err error, msg ...string) error {
 		return nil
 	}
 
-	_, ok := err.(*XDError)
+	_, ok := err.(*CommonError)
 	if ok {
 		return err
 	}
@@ -100,7 +100,7 @@ func Wrap(err error, msg ...string) error {
 }
 
 func Code(err error) ErrorCodeType {
-	xderror, ok := err.(*XDError)
+	xderror, ok := err.(*CommonError)
 	if !ok {
 		return ErrorCodeUnknown
 	}

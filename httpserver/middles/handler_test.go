@@ -29,7 +29,7 @@ func TestHandler(t *testing.T) {
 			t.Error(err)
 		}
 	}()
-	handle := func(ctx context.Context, req *Req, rsp *Rsp) *sdkError.XDError {
+	handle := func(ctx context.Context, req *Req, rsp *Rsp) *sdkError.CommonError {
 		rsp.A = req.A
 		return nil
 	}

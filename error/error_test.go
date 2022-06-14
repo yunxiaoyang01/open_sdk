@@ -54,7 +54,7 @@ func TestUnwrap(t *testing.T) {
 		},
 		{
 			ori:  ori,
-			wrap: ErrToXDError(ori, ErrorCodeUnknown),
+			wrap: ErrToCommonError(ori, ErrorCodeUnknown),
 			want: true,
 		},
 		{

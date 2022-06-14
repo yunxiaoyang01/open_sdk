@@ -25,7 +25,7 @@ func outsideContainer() bool {
 	if err == nil {
 		return false
 	}
-	return os.Getenv("XDRUNTIME") == "" // default is true, set XDRUNTIME to disable this.
+	return os.Getenv("CommonRUNTIME") == "" // default is true, set CommonRUNTIME to disable this.
 }
 
 func CreateHandlerFunc(handler interface{}, method string) gin.HandlerFunc {

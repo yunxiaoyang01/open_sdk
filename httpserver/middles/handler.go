@@ -30,9 +30,9 @@ var (
 	ErrMustError         = errors.New("method ret must be error or xderror")
 	ErrMustOneOut        = errors.New("method must has one out")
 
-	initerType       = reflect.TypeOf((*Initer)(nil)).Elem()
-	replyErrorType   = reflect.TypeOf((*error)(nil)).Elem()
-	replyXDErrorType = reflect.TypeOf((*xe.XDError)(nil))
+	initerType           = reflect.TypeOf((*Initer)(nil)).Elem()
+	replyErrorType       = reflect.TypeOf((*error)(nil)).Elem()
+	replyCommonErrorType = reflect.TypeOf((*xe.CommonError)(nil))
 
 	RequestKey    = requestKey{}
 	ResponseKey   = responseKey{}
@@ -89,7 +89,7 @@ func checkMethod(method interface{}) (mV reflect.Value, reqT, replyT reflect.Typ
 		return
 	}
 	retT := mT.Out(0)
-	if retT != replyErrorType && retT != replyXDErrorType {
+	if retT != replyErrorType && retT != replyCommonErrorType {
 		err = ErrMustError
 		return
 	}
@@ -196,7 +196,7 @@ func CreateHandlerFuncWithLogger(method interface{}, l logger.Logger, opts ...Op
 		errValue := results[0]
 		if errValue.Interface() != nil {
 			switch v := errValue.Interface().(type) {
-			case *xe.XDError:
+			case *xe.CommonError:
 				if v != nil {
 					l.WithFields(logger.Fields{
 						"req": c.Request.URL,
