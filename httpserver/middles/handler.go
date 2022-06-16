@@ -27,7 +27,7 @@ var (
 	ErrMustHasThreeParam = errors.New("method must has three input")
 	ErrMustFunc          = errors.New("method must be func")
 	ErrMustValid         = errors.New("method must be valid")
-	ErrMustError         = errors.New("method ret must be error or xderror")
+	ErrMustError         = errors.New("method ret must be error or commonerror")
 	ErrMustOneOut        = errors.New("method must has one out")
 
 	initerType           = reflect.TypeOf((*Initer)(nil)).Elem()

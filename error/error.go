@@ -100,10 +100,10 @@ func Wrap(err error, msg ...string) error {
 }
 
 func Code(err error) ErrorCodeType {
-	xderror, ok := err.(*CommonError)
+	commonerror, ok := err.(*CommonError)
 	if !ok {
 		return ErrorCodeUnknown
 	}
 
-	return xderror.Code
+	return commonerror.Code
 }
