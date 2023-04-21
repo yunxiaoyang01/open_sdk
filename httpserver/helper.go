@@ -32,6 +32,12 @@ func CreateHandlerFunc(handler interface{}, method string) gin.HandlerFunc {
 	return CreateHandlerFuncWithLogger(handler, method, logger.StandardLogger())
 }
 
+// NewHandlerFuncFrom 从 GRPC handler 中创建 gin handler
+// method 格式为 Method(ctx context.Context, req *ReqObj) (rsp *RspObj, err error)
+func NewHandlerFuncFrom(method interface{}, opt ...middles.Option) gin.HandlerFunc {
+	return middles.NewHandlerFuncFrom(method, opt...)
+}
+
 func CreateHandlerFuncWithLogger(handler interface{}, method string, l logger.Logger) gin.HandlerFunc {
 	hV := reflect.ValueOf(handler)
 	mV := hV.MethodByName(method)
